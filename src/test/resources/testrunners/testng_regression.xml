@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Demo QA Regression suite" parallel="tests" verbose="4">
+    <test name="Demo QA Home Test with Chrome">
+        <parameter name="browserName" value="chromium"></parameter>
+        <classes>
+            <class name="com.qa.demoqa.tests.HomePageTest"></class>
+        </classes>
+    </test>
+    <test name="Demo QA Elements Test with Chrome">
+        <parameter name="browserName" value="firefox"></parameter>
+        <classes>
+            <class name="com.qa.demoqa.tests.ElementsPageTest"></class>
+        </classes>
+    </test>
+</suite>
