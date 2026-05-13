@@ -9,7 +9,7 @@
         </classes>
     </test>
     <test name="Demo QA Elements Test with Chrome">
-        <parameter name="browserName" value="firefox"></parameter>
+        <parameter name="browserName" value="chromium"></parameter>
         <classes>
             <class name="com.qa.demoqa.tests.ElementsPageTest"></class>
         </classes>

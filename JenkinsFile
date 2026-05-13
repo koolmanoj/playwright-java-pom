@@ -24,6 +24,17 @@ pipeline {
         }
     }
 
+     stage('Start Selenium Grid') {
+
+                steps {
+
+                    echo 'Starting Selenium Grid...'
+
+                    bat 'docker compose -f src/main/java/com/qa/demoqa/docker/docker-compose.yaml up -d'
+                }
+            }
+
+
     stage('Build') {
         steps {
             echo 'Building framework...'
@@ -47,6 +58,10 @@ pipeline {
             post {
                 always {
                    junit 'target/surefire-reports/*.xml'
+
+                    echo 'Stopping Selenium Grid...'
+
+                    bat 'docker compose -f src/main/java/com/qa/demoqa/docker/docker-compose.yaml'
                 }
             }
         }
