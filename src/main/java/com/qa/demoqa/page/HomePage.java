@@ -19,8 +19,10 @@ public class HomePage {
         return page.locator(logo).isVisible();
     }
 
-    public boolean isBannerImageExist() {
-        return page.locator(bannerImage).isVisible();
+    public boolean isBannerImageExist() throws InterruptedException {
+        Locator banner = page.locator(bannerImage);
+        banner.waitFor(new Locator.WaitForOptions().setTimeout(5000));
+        return banner.isVisible();
     }
 
     public String getTitle() {

@@ -16,7 +16,7 @@ public class HomePageTest extends BaseTest {
     }
 
     @Test
-    public void bannerImageTest() {
+    public void bannerImageTest() throws InterruptedException {
         System.out.println("Home page banner image test");
         boolean flag = homePage.isBannerImageExist();
         Assert.assertTrue(flag);

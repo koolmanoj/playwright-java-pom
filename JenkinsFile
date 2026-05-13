@@ -1,0 +1,54 @@
+pipeline {
+    agent any
+
+/*     tools {
+            jdk 'JDK21'
+            maven 'Maven3'
+    } */
+
+/*     environment {
+
+            MAVEN_OPTS = '-Xmx1024m'
+
+            BROWSER = 'chromium'
+
+            ENV = 'qa'
+    } */
+    stages {
+        stage('Checkout') {
+        steps {
+            echo 'Checking out source code...'
+
+            git branch: 'main',
+            url: 'https://github.com/koolmanoj/playwright-java-pom.git'
+        }
+    }
+
+    stage('Build') {
+        steps {
+            echo 'Building framework...'
+
+            bat 'mvn clean package -DskipTests'
+        }
+    }
+        stage('Deploy to QA') {
+        steps{
+            echo 'Deploy to QA'
+            }
+        }
+
+        stage('Regression Test Execution') {
+
+        steps {
+        echo 'Executing Regression tests'
+
+        bat 'mvn test -DsuiteXmlFile=testng-regression.xml'
+        }
+            post {
+                always {
+                   junit 'target/surefire-reports/*.xml'
+                }
+            }
+        }
+    }
+}
