@@ -1,6 +1,17 @@
 pipeline {
     agent any
 
+     parameters {
+            choice(name: 'BROWSER',
+                   choices: ['chromium', 'firefox', 'webkit'])
+
+             booleanParam(
+                        name: 'HEADLESS',
+                        defaultValue: true,
+                        description: 'Run in headless mode'
+                    )
+        }
+
 /*     tools {
             jdk 'JDK21'
             maven 'Maven3'
@@ -30,7 +41,7 @@ pipeline {
 
                     echo 'Starting Selenium Grid...'
 
-                    bat 'docker compose -f src/main/java/com/qa/demoqa/docker/docker-compose.yaml up -d'
+                    //bat 'docker compose -f src/main/java/com/qa/demoqa/docker/docker-compose.yaml up -d'
                 }
             }
 
@@ -53,15 +64,15 @@ pipeline {
         steps {
         echo 'Executing Regression tests'
 
-        bat 'mvn test -DsuiteXmlFile=testng-regression.xml'
+        bat """ mvn clean test -DsuiteXmlFile=testng-regression.xml -Dbrowser=%BROWSER% -Dheadless=%HEADLESS% """
         }
             post {
                 always {
                    junit 'target/surefire-reports/*.xml'
 
-                    echo 'Stopping Selenium Grid...'
+                    //echo 'Stopping Selenium Grid...'
 
-                    bat 'docker compose -f src/main/java/com/qa/demoqa/docker/docker-compose.yaml'
+                    //bat 'docker compose -f src/main/java/com/qa/demoqa/docker/docker-compose.yaml'
                 }
             }
         }

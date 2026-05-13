@@ -20,7 +20,7 @@ public class HomePageTestOpenCartNotUsed {
     public void setUp() {
         System.out.println("Home page setup");
         pf = new PlaywrightFactory();
-        page = pf.init("chromium", "https://demo.opencart.com/");
+        page = pf.init("chromium", false, "https://demo.opencart.com/");
         homePageOpenCartNotUsed = new HomePageOpenCartNotUsed(page);
     }
 

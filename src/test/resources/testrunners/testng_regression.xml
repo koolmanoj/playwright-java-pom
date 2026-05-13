@@ -3,13 +3,15 @@
 
 <suite name="Demo QA Regression suite" parallel="tests" verbose="4">
     <test name="Demo QA Home Test with Chrome">
-        <parameter name="browserName" value="chromium"></parameter>
+        <parameter name="browserName" value="${browser}"></parameter>
+        <parameter name="headless" value="${headless}"></parameter>
         <classes>
             <class name="com.qa.demoqa.tests.HomePageTest"></class>
         </classes>
     </test>
     <test name="Demo QA Elements Test with Chrome">
-        <parameter name="browserName" value="chromium"></parameter>
+        <parameter name="browserName" value="${browser}"></parameter>
+        <parameter name="headless" value="${headless}"></parameter>
         <classes>
             <class name="com.qa.demoqa.tests.ElementsPageTest"></class>
         </classes>

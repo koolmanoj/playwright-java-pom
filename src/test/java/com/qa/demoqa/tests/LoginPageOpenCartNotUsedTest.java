@@ -21,7 +21,7 @@ public class LoginPageOpenCartNotUsedTest {
     public void setUp() {
         System.out.println("Login page setup");
         pf = new PlaywrightFactory();
-        page = pf.init("chromium", "https://demo.opencart.com/");
+        page = pf.init("chromium", false, "https://demo.opencart.com/");
         loginPageOpenCartNotUsed = new LoginPageOpenCartNotUsed(page);
     }
 

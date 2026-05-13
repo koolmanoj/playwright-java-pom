@@ -13,7 +13,7 @@ public class PlaywrightFactory {
 
     private Properties prop;
 
-    public Page init(final String browserName,final String url) {
+    public Page init(final String browserName, final boolean headless, final String url) {
         System.out.println("Browser name is: " + browserName);
 
         /*PlaywrightThreadManager.setTlPlaywright(Playwright.create());
@@ -31,7 +31,7 @@ public class PlaywrightFactory {
         PlaywrightThreadManager.getTlPage().navigate(url);*/
 
         initializePlaywright();
-        initializeBrowser(browserName);
+        initializeBrowser(browserName, headless);
         initializeContext();
         initializePage();
         navigateToUrl(url);
@@ -54,11 +54,11 @@ public class PlaywrightFactory {
         PlaywrightThreadManager.setTlBrowserContext(browserContext);
     }
 
-    private void initializeBrowser(String browserName) {
+    private void initializeBrowser(final String browserName, final boolean headless) {
         final Browser browser = switch (browserName.toLowerCase()) {
-            case "chromium" -> launchBrowser(PlaywrightThreadManager.getTlPlaywright().chromium());
-            case "firefox" -> launchBrowser(PlaywrightThreadManager.getTlPlaywright().firefox());
-            case "webkit" ->  launchBrowser(PlaywrightThreadManager.getTlPlaywright().webkit());
+            case "chromium" -> launchBrowser(PlaywrightThreadManager.getTlPlaywright().chromium(), headless);
+            case "firefox" -> launchBrowser(PlaywrightThreadManager.getTlPlaywright().firefox(), headless);
+            case "webkit" ->  launchBrowser(PlaywrightThreadManager.getTlPlaywright().webkit(), headless);
             default -> throw new IllegalArgumentException("Unsupported browser: " + browserName);
         };
 
@@ -69,10 +69,10 @@ public class PlaywrightFactory {
         PlaywrightThreadManager.setTlPlaywright(Playwright.create());;
     }
 
-    private Browser launchBrowser(BrowserType browserType) {
+    private Browser launchBrowser(BrowserType browserType, final boolean headless) {
         return browserType.launch(
                 new BrowserType.LaunchOptions()
-                        .setHeadless(false)
+                        .setHeadless(headless)
                         .setSlowMo(100)
                         .setArgs(Arrays.asList("--disable-blink-features=AutomationControlled"))
                         /*.setEnv(Map.of(

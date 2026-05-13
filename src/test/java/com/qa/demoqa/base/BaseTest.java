@@ -20,12 +20,12 @@ public class BaseTest {
     Properties prop;
 
     @BeforeTest
-    @Parameters({"browserName"})
-    public void setUp(String browserName) throws IOException {
+    @Parameters({"browserName", "headless"})
+    public void setUp(final String browserName, final boolean headless) throws IOException {
         System.out.println("Home page setup");
         pf = new PlaywrightFactory();
         prop = pf.propInit();
-        page = pf.init(browserName, prop.getProperty("URL"));
+        page = pf.init(browserName, headless, prop.getProperty("URL"));
         homePage = new HomePage(page);
     }
 

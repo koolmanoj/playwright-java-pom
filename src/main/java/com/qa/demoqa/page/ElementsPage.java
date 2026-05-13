@@ -5,10 +5,10 @@ import com.microsoft.playwright.Page;
 
 public class ElementsPage {
 
-    private Page page;
+    final private Page page;
 
-    private String elementsPage = "div:text('Elements')";
-    private String boxes = "span";
+    private final String elementsPage = "div:text('Elements')";
+    private final String boxes = "span";
 
     public ElementsPage(Page page) {
         this.page = page;
