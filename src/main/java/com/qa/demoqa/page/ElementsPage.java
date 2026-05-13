@@ -32,5 +32,4 @@ public class ElementsPage {
                 new Locator.FilterOptions().setHasText("text-box")).click();
         return new TextBoxPage(page);
     }
-
 }
